@@ -1,7 +1,5 @@
 const playerSelection = 'Rock'
-const computerSelection = getComputerChoice();
-console.log(playRound(playerSelection, computerSelection));
-
+console.log(game());
 
 
 
@@ -16,24 +14,53 @@ function getComputerChoice() {
     }
 }
 
-function playRound(playerSelection, computerSelection) {
+function playRound() {
+    let computerSelection = getComputerChoice();
+    let playerSelection = prompt("Rock, Paper, or Scissors: ");
     let player = playerSelection.toUpperCase();
     let computer = computerSelection;
     if (computer === player) {
-        return 'Tie!';
+        return 'tie';
     } else if (computer === "ROCK" && player === "PAPER") {
-        return "You Win! Paper beats Rock";
+        return "player";
     } else if (computer === "ROCK" && player === "SCISSORS") {
-        return "You Lose! Rock beats Scissors";
+        return "computer";
     } else if (computer === "PAPER" && player === "SCISSORS") {
-        return "You Win! Scissors beats Paper";
+        return "player";
     } else if (computer === "PAPER" && player === "ROCK") {
-        return "You Lose! Paper beats Rock";
+        return "computer";
     } else if (computer === "SCISSORS" && player === "PAPER") {
-        return "You Lose! Scissors beats Paper";
+        return "computer";
     } else if (computer === "SCISSORS" && player === "ROCK") {
-        return "You Win! Rock beats Scissors";
+        return "player";
     } else {
         return 'Unexpected input';
+    }
+}
+
+// TODO: break out of the loop if either party wins 3
+// TODO: Give better win messages
+// TODO: Extend game if tied
+function game() {
+    let playerScore = 0;
+    let computerScore = 0;
+    for (let i = 1; i <= 5; i++) {
+        winner = playRound();
+        if (winner === "tie") {
+            alert("Tie!")
+            computerScore++;
+            playerScore++;
+        } else if (winner === "computer") {
+            alert("Computer wins!")
+            computerScore++;
+        } else {
+            alert("You win!");
+            playerScore++;
+        }
+    }
+    if (computerScore > playerScore) {
+        alert("Computer wins it all!");
+    } else {
+        alert("Player wins it all!");
     }
 }
